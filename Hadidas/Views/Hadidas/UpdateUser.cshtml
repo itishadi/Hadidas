@@ -20,6 +20,7 @@
                 <td>@user.Email</td>
                 <td>
                     <a href="@Url.Action("UpdatedUser", "Hadidas", new { id = user.Id })">Uppdatera</a>
+                    <a href="@Url.Action("DeleteUser", "Hadidas", new { id = user.Id })">Radera</a>
                 </td>
             </tr>
         }

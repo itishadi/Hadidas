@@ -1,0 +1,17 @@
+﻿@model Hadidas.Models.User
+
+<h2>Bekräfta radering</h2>
+
+<p>Är du säker på att du vill radera följande användare?</p>
+
+<ul>
+    <li><strong>Förnamn:</strong> @Model.FirstName</li>
+    <li><strong>Efternamn:</strong> @Model.LastName</li>
+    <li><strong>Email:</strong> @Model.Email</li>
+</ul>
+
+<form asp-action="DeleteUserConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit">Ja, radera</button>
+    <a href="@Url.Action("UpdateUser", "Hadidas")">Avbryt</a>
+</form>

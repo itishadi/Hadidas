@@ -9,12 +9,14 @@ namespace Hadidas.Controllers
         private readonly IAddUserService _addUserService;
         private readonly IReadUserService _readUserService;
         private readonly IUpdateUserService _updateUserService;
+        private readonly IDeleteUserService _deleteUserService;
 
-        public HadidasController(IAddUserService addUserService, IReadUserService readUserService, IUpdateUserService updateUserService)
+        public HadidasController(IAddUserService addUserService, IReadUserService readUserService, IUpdateUserService updateUserService, IDeleteUserService deleteUserService)
         {
             _addUserService = addUserService;
             _readUserService = readUserService;
             _updateUserService = updateUserService;
+            _deleteUserService = deleteUserService;
         }
 
         public IActionResult Index()
@@ -23,6 +25,10 @@ namespace Hadidas.Controllers
         }
         
         public IActionResult UpdatedUser()
+        {
+            return View();
+        }
+        public IActionResult DeleteUser()
         {
             return View();
         }
@@ -99,25 +105,25 @@ namespace Hadidas.Controllers
             return View(user); // Visa formuläret igen med ev. fel
         }
 
+        [HttpGet]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _readUserService.ReadAllUsers().FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return View("Error");
+            }
 
-        //[HttpPost]
-        //public IActionResult UpdatedUser(User user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _updateUserService.UpdateUser(user);
-        //            return RedirectToAction("UpdateUser"); // 👈 gå tillbaka till listan
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ModelState.AddModelError("", $"Fel vid uppdatering: {ex.Message}");
-        //        }
-        //    }
+            return View(user); // 👈 visar DeleteUser.cshtml med användarens data
+        }
 
-        //    return View(user);
-        //}
+        [HttpPost]
+        public IActionResult DeleteUserConfirmed(int id)
+        {
+            _deleteUserService.DeleteUser(id);
+            return RedirectToAction("UpdateUser"); // 👈 tillbaka till användarlistan
+        }
+
 
 
 

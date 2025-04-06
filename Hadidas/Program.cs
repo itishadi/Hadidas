@@ -8,6 +8,8 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IAddUserService, AddUserService>();
 builder.Services.AddScoped<IReadUserService, ReadUserService>();
 builder.Services.AddScoped<IUpdateUserService, UpdateUserService>();
+builder.Services.AddScoped<IDeleteUserService, DeleteUserService>();
+
 
 
 var app = builder.Build();
