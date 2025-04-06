@@ -4,11 +4,11 @@ using Hadidas.Services.UserCRUD.Interface;
 
 namespace Hadidas.Services.UserCRUD
 {
-    public class UserAddService : IUserAddService
+    public class AddUserService : IAddUserService
     {
         private readonly ApplicationDbContext _context;
 
-        public UserAddService(ApplicationDbContext context)
+        public AddUserService(ApplicationDbContext context)
         {
             _context = context;
         }

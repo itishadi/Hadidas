@@ -2,8 +2,8 @@
 
 namespace Hadidas.Services.UserCRUD.Interface
 {
-    public interface IUserAddService
+    public interface IReadUserService
     {
-        void AddUser(User user);
+       public List<User> ReadAllUsers();
     }
 }

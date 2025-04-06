@@ -1,21 +1,9 @@
-﻿@model Hadidas.Models.User
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
-<form method="post" asp-action="AddUser">
-    <div>
-        <label for="FirstName">First Name:</label>
-        <input type="text" id="FirstName" name="FirstName" required />
-    </div>
-    <div>
-        <label for="LastName">Last Name:</label>
-        <input type="text" id="LastName" name="LastName" required />
-    </div>
-    <div>
-        <label for="Email">Email:</label>
-        <input type="email" id="Email" name="Email" required />
-    </div>
-    <div>
-        <label for="Password">Password:</label>
-        <input type="password" id="Password" name="Password" required />
-    </div>
-    <button type="submit">Add User</button>
-</form>
+<h2>Index Page</h2>
+
+<!-- Länk till AddUser sidan -->
+<a href="@Url.Action("AddUser", "Hadidas")">Go to Add User</a>
+<a href="@Url.Action("ReadUsers", "Hadidas")">Go to Read User</a>
