@@ -1,10 +1,13 @@
 ﻿using Hadidas.Data;
+using Hadidas.Services.UserCRUD.Interface;
+using Hadidas.Services.UserCRUD;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddScoped<IUserAddService, UserAddService>();
 
 
 
