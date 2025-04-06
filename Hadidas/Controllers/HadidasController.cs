@@ -8,35 +8,41 @@ namespace Hadidas.Controllers
     {
         private readonly IAddUserService _addUserService;
         private readonly IReadUserService _readUserService;
+        private readonly IUpdateUserService _updateUserService;
 
-        public HadidasController(IAddUserService addUserService, IReadUserService readUserService)
+        public HadidasController(IAddUserService addUserService, IReadUserService readUserService, IUpdateUserService updateUserService)
         {
             _addUserService = addUserService;
             _readUserService = readUserService;
+            _updateUserService = updateUserService;
         }
 
-        // HTTP GET method for displaying a form
         public IActionResult Index()
+        {
+            return View();
+        }
+        
+        public IActionResult UpdatedUser()
         {
             return View();
         }
 
         public IActionResult AddUser()
         {
-            return View(); // Returns AddUser.cshtml view for adding a new user
+            return View();
         }
-        public IActionResult ReadUser()
+        public IActionResult UpdateUser()
         {
-            return View(); // Returns AddUser.cshtml view for adding a new user
+            var users = _readUserService.ReadAllUsers();
+            return View(users);
         }
 
-        // HTTP POST method for adding a user
         [HttpPost]
         public IActionResult AddUser(User user)
         {
             if (ModelState.IsValid)
             {
-                _addUserService.AddUser(user); // Calls the AddUser method from UserAddService
+                _addUserService.AddUser(user);
                 return RedirectToAction("Index"); // Redirects back to the index page
             }
 
@@ -47,15 +53,71 @@ namespace Hadidas.Controllers
         [HttpGet]
         public IActionResult ReadUsers()
         {
-            var users = _readUserService.ReadAllUsers(); // Hämtar alla användare
+            var users = _readUserService.ReadAllUsers();
 
-            if (users == null || !users.Any()) // Kontrollera om det finns några användare
+            if (users == null || !users.Any())
             {
-                return View("Error"); // Om inga användare finns, visa ett fel
+                return View("Error");
             }
 
-            return View("ReadUsers", users); // Returnerar vyn med användardata
+            return View(users);
         }
+
+
+
+        // GET: Visa formuläret med användarens befintliga info
+        [HttpGet]
+        public IActionResult UpdatedUser(int id)
+        {
+            var user = _readUserService.ReadAllUsers().FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return View("Error"); // Visa felvy om användaren inte hittas
+            }
+
+            return View(user); // Skicka användaren till UpdateUser.cshtml
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdatedUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _updateUserService.UpdateUser(user); // Uppdatera användaren
+                    return RedirectToAction("UpdateUser");    // Tillbaka till listan
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Fel vid uppdatering: {ex.Message}");
+                }
+            }
+
+            return View(user); // Visa formuläret igen med ev. fel
+        }
+
+
+        //[HttpPost]
+        //public IActionResult UpdatedUser(User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _updateUserService.UpdateUser(user);
+        //            return RedirectToAction("UpdateUser"); // 👈 gå tillbaka till listan
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ModelState.AddModelError("", $"Fel vid uppdatering: {ex.Message}");
+        //        }
+        //    }
+
+        //    return View(user);
+        //}
 
 
 

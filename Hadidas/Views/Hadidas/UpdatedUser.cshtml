@@ -1,0 +1,32 @@
+﻿ @model Hadidas.Models.User
+
+<h2>Uppdatera användare</h2>
+
+<form asp-action="UpdatedUser" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+    </div>
+
+    <button type="submit">Spara</button>
+</form>
+
+<br />
+<a href="@Url.Action("UpdateUser", "Hadidas")">⬅ Tillbaka till listan</a>
