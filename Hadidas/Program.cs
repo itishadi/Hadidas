@@ -25,6 +25,9 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Hadidas}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Hadidas}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,4 +1,16 @@
-﻿ @model IEnumerable<Hadidas.Models.User>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Index Page</h2>
+
+<!-- Länk till AddUser sidan -->
+<a href="@Url.Action("AddUser", "UserHadidas")">Go to Add User</a>
+<a href="@Url.Action("ReadUsers", "UserHadidas")">Go to Read User</a>
+<a href="@Url.Action("UpdateUser", "UserHadidas")">Go to Update User</a>
+
+
+@* @model IEnumerable<Hadidas.Models.User>
 
 <h2>Alla användare</h2>
 
@@ -19,11 +31,10 @@
                 <td>@user.LastName</td>
                 <td>@user.Email</td>
                 <td>
-                    <a href="@Url.Action("UpdatedUser", "Hadidas", new { id = user.Id })">Uppdatera</a>
-                    <a href="@Url.Action("DeleteUser", "Hadidas", new { id = user.Id })">Radera</a>
+                    <a href="@Url.Action("UpdateUser", "Hadidas", new { id = user.Id })">Uppdatera</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
+ *@

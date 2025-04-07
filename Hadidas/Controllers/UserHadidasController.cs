@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hadidas.Controllers
 {
-    public class HadidasController : Controller
+    public class UserHadidasController : Controller
     {
         private readonly IAddUserService _addUserService;
         private readonly IReadUserService _readUserService;
         private readonly IUpdateUserService _updateUserService;
         private readonly IDeleteUserService _deleteUserService;
 
-        public HadidasController(IAddUserService addUserService, IReadUserService readUserService, IUpdateUserService updateUserService, IDeleteUserService deleteUserService)
+        public UserHadidasController(IAddUserService addUserService, IReadUserService readUserService, IUpdateUserService updateUserService, IDeleteUserService deleteUserService)
         {
             _addUserService = addUserService;
             _readUserService = readUserService;

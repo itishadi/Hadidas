@@ -20,5 +20,7 @@ namespace Hadidas.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+
     }
 }
