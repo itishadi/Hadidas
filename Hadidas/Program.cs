@@ -1,6 +1,8 @@
 ﻿using Hadidas.Data;
 using Hadidas.Services.UserCRUD.Interface;
 using Hadidas.Services.UserCRUD;
+using Hadidas.Services.ShiftCRUD.Interface;
+using Hadidas.Services.ShiftCRUD;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -9,7 +11,7 @@ builder.Services.AddScoped<IAddUserService, AddUserService>();
 builder.Services.AddScoped<IReadUserService, ReadUserService>();
 builder.Services.AddScoped<IUpdateUserService, UpdateUserService>();
 builder.Services.AddScoped<IDeleteUserService, DeleteUserService>();
-
+builder.Services.AddScoped<ICreateShiftService, CreateShiftService>();
 
 
 var app = builder.Build();

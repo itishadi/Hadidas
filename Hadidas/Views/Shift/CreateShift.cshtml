@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Skapa Skift";
+}
+
+<dev>create</dev>
+@model Hadidas.Models.Shift
+
+<form asp-action="CreateShift" method="post">
+    <div>
+        <label asp-for="DateTime"></label>
+        <input asp-for="MyShift" type="datetime-local" />
+    </div>
+    <div>
+        <label asp-for="DateTime"></label>
+        <input asp-for="MyShift" type="datetime-local" />
+    </div>
+    <button type="submit">Spara</button>
+</form>
+
+
+<h2>Skapa nytt skift</h2>
+
+<form asp-action="CreateShift" method="post">
+    <div>
+        <label asp-for="MyShift"></label>
+        <input asp-for="MyShift" />
+        <span asp-validation-for="MyShift" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="DayOfWeek"></label>
+        <input asp-for="DayOfWeek" />
+        <span asp-validation-for="DayOfWeek" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="WeekOfYear"></label>
+        <input asp-for="WeekOfYear" />
+        <span asp-validation-for="WeekOfYear" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Month"></label>
+        <input asp-for="Month" />
+        <span asp-validation-for="Month" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Year"></label>
+        <input asp-for="Year" />
+        <span asp-validation-for="Year" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="DateTime"></label>
+        <input asp-for="DateTime" type="datetime-local" />
+        <span asp-validation-for="DateTime" style="color:red"></span>
+    </div>
+
+    <button type="submit">Spara skift</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

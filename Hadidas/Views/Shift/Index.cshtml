@@ -1,1 +1,10 @@
-﻿<dev>Shift</dev>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Index Page</h2>
+<dev>Shift</dev>
+<!-- Länk till AddUser sidan -->
+<a href="@Url.Action("CreateShift", "Shift")">Go to Add Shift</a>
+@* <a href="@Url.Action("ReadUsers", "UserHadidas")">Go to Read User</a> *@
+@* <a href="@Url.Action("UpdateUser", "UserHadidas")">Go to Update User</a> *@
