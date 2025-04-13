@@ -6,6 +6,7 @@ namespace Hadidas.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
+            // Lägg till admin-användare
             if (!context.Users.Any())
             {
                 context.Users.AddRange(
@@ -16,7 +17,42 @@ namespace Hadidas.Data
                 );
                 context.SaveChanges();
             }
+
+            // Lägg till en grupp
+            if (!context.Groups.Any())
+            {
+                context.Groups.Add(new Group
+                {
+                    GroupName = "Testgruppen"
+                });
+                context.SaveChanges();
+            }
+
+            // Lägg till MessageUser
+            if (!context.MessageUsers.Any())
+            {
+                var group = context.Groups.FirstOrDefault();
+                context.MessageUsers.Add(new MessageUser
+                {
+                    Name = "Testperson",
+                    PhoneNumber = "0701234567",
+                    GroupId = group?.GroupId
+                });
+                context.SaveChanges();
+            }
+
+            // Lägg till ett testmeddelande
+            if (!context.Messages.Any())
+            {
+                var user = context.MessageUsers.FirstOrDefault();
+                context.Messages.Add(new Message
+                {
+                    Content = "Välkommen till systemet!",
+                    SentAt = DateTime.Now,
+                    MessageUserId = user?.MessageUserId
+                });
+                context.SaveChanges();
+            }
         }
     }
 }
-

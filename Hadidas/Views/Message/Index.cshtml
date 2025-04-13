@@ -1,0 +1,14 @@
+﻿@model List<Message>
+
+<h2>Skickade meddelanden</h2>
+
+<ul>
+
+    @foreach (var msg in Model)
+    {
+        <li>
+            <b>@msg.SentAt.ToString("g")</b> - @msg.Content <br />
+            Till: @(msg.MessageUser?.Name ?? msg.Group?.GroupName)
+        </li>
+    }
+</ul>

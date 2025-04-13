@@ -4,6 +4,7 @@ using Hadidas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hadidas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250411190058_AddMessageAndGroupTables")]
+    partial class AddMessageAndGroupTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,6 +150,9 @@ namespace Hadidas.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -156,6 +162,8 @@ namespace Hadidas.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Users");
                 });
@@ -178,15 +186,22 @@ namespace Hadidas.Migrations
             modelBuilder.Entity("Hadidas.Models.MessageUser", b =>
                 {
                     b.HasOne("Hadidas.Models.Group", "Group")
-                        .WithMany("MessageUsers")
+                        .WithMany()
                         .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("Hadidas.Models.User", b =>
+                {
+                    b.HasOne("Hadidas.Models.Group", null)
+                        .WithMany("Users")
+                        .HasForeignKey("GroupId");
+                });
+
             modelBuilder.Entity("Hadidas.Models.Group", b =>
                 {
-                    b.Navigation("MessageUsers");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Hadidas.Models.MessageUser", b =>

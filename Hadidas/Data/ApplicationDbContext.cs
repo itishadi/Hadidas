@@ -20,7 +20,11 @@ namespace Hadidas.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<MessageUser> MessageUsers { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Group> Groups => Set<Group>();
+        public DbSet<Message> Messages => Set<Message>();
+
 
     }
 }

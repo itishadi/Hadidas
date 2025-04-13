@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Skicka meddelande";
+}
+
+<h2>Skicka Meddelande</h2>
+
+<form method="post">
+    <div>
+        <label>Meddelande:</label>
+        <textarea name="content" required></textarea>
+    </div>
+    <div>
+        <label>Skicka till grupp:</label>
+        <select name="groupId">
+            <option value="">-- Välj grupp --</option>
+            @foreach (var g in (SelectList)ViewBag.Groups)
+            {
+                <option value="@g.Value">@g.Text</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Eller till en person:</label>
+        <select name="messageUserId">
+            <option value="">-- Välj användare --</option>
+            @foreach (var u in (SelectList)ViewBag.MessageUsers)
+            {
+                <option value="@u.Value">@u.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Skicka</button>
+</form>
